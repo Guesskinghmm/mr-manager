@@ -1,0 +1,174 @@
+:root {
+    --bg-gradient-start: #2a3a7c;
+    --bg-gradient-end: #3b6bdc;
+    --text-light: #ffffff;
+    --text-muted: #aab8e4;
+    --accent-blue: #6ca0ff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+    min-height: 100vh;
+    color: var(--text-light);
+}
+
+/* --- Navigation (Flexbox) --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 4%;
+    background: transparent;
+}
+
+.logo {
+    height: 95px; 
+    object-fit: contain;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--accent-blue);
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+/* --- Formal Authentication Button --- */
+.auth-btn {
+    background-color: #ffffff;
+    color: #1a2238;
+    text-decoration: none;
+    padding: 0.75rem 1.75rem;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: inline-block;
+}
+
+.auth-btn:hover {
+    background-color: #f4f6f9;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    transform: translateY(-1px);
+}
+
+/* --- Hero Section (Flexbox) --- */
+.hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 4rem;
+    color: var(--text-muted);
+}
+
+/* --- Mockup Window Layout --- */
+.mockup-container {
+    width: 100%;
+    max-width: 1000px;
+    background: rgba(255, 255, 255, 0.15); /* Bezel */
+    padding: 1.2rem;
+    border-radius: 1rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.mockup-window {
+    background: #ffffff;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    color: #333;
+    min-height: 450px;
+}
+
+.brand-tab {
+    background: #1a2238; 
+    color: #ffffff;
+    padding: 1rem 2rem;
+    display: inline-block;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.mockup-body {
+    padding: 4rem 2rem;
+}
+
+.mockup-body h2 {
+    margin-bottom: 3rem;
+    font-size: 1.8rem;
+}
+
+/* --- Workflow Steps (CSS Grid) --- */
+.workflow-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    text-align: center;
+}
+
+.step-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.step h3 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    color: #222;
+}
+
+.step p {
+    font-size: 0.85rem;
+    color: #777;
+    line-height: 1.5;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 900px) {
+    .navbar {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    .workflow-steps {
+        grid-template-columns: 1fr;
+    }
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+}

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+     <link rel="icon" type="image/png" href="images/Logo.png">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <header class="topbar">
+        <div class="brand">Mr. Manager</div>
+        <div class="user-welcome">Welcome, Loading...</div>
+    </header>
+
+    <div class="layout">
+        <aside class="sidebar">
+            <nav>
+                <a href="#" id="nav-dashboard" class="active">Dashboard</a>
+                <a href="#" id="nav-tasks">Tasks</a>
+                <a href="#" id="nav-team">Team</a>
+                <a href="#" id="nav-notes">Notes</a>
+                <a href="#" id="nav-profile">Profile</a>
+                <a href="#" id="nav-logout">Logout</a>
+            </nav>
+        </aside>
+
+        <main class="content">
+            
+            <div id="view-dashboard" class="view-section">
+                <div class="stats-container">
+                    <div class="stat-box"><h3>Total Tasks</h3><p id="stat-total">0</p></div>
+                    <div class="stat-box"><h3>Completed</h3><p id="stat-completed">0</p></div>
+                    <div class="stat-box"><h3>Pending</h3><p id="stat-pending">0</p></div>
+                </div>
+            </div>
+
+            <div id="view-tasks" class="view-section hidden">
+                <div class="header-action">
+                    <h2>Workflow Board</h2>
+                    <div class="header-controls">
+                        <select id="sort-tasks" class="sort-select">
+                            <option value="default">Sort By: Newest First</option>
+                            <option value="date-asc">Due Date (Earliest First)</option>
+                            <option value="date-desc">Due Date (Latest First)</option>
+                            <option value="priority-desc">Priority (High to Low)</option>
+                            <option value="priority-asc">Priority (Low to High)</option>
+                        </select>
+                        <button id="add-task-btn" class="add-btn">+ Add Task</button>
+                    </div>
+                </div>
+                
+                <div class="kanban-board">
+                    <div class="kanban-column" data-status="todo">
+                        <div class="column-header"><h3>To Do</h3></div>
+                        <div class="kanban-cards" id="list-todo"></div>
+                    </div>
+                    <div class="kanban-column" data-status="progress">
+                        <div class="column-header"><h3>In Progress</h3></div>
+                        <div class="kanban-cards" id="list-progress"></div>
+                    </div>
+                    <div class="kanban-column" data-status="completed">
+                        <div class="column-header"><h3>Completed</h3></div>
+                        <div class="kanban-cards" id="list-completed"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="view-team" class="view-section hidden">
+                <div class="header-action">
+                    <h2>Team Directory</h2>
+                    <button id="add-member-btn" class="add-btn">+ Add Member</button>
+                </div>
+                <div class="team-grid" id="team-list"></div>
+            </div>
+
+            <div id="view-notes" class="view-section hidden">
+                <div class="header-action">
+                    <h2>My Notes</h2>
+                    <button id="add-note-btn" class="add-btn">+ Add Note</button>
+                </div>
+                <div class="notes-controls">
+                    <input type="text" id="search-notes" placeholder="🔍 Search notes by title or content..." class="search-input">
+                </div>
+                <div class="notes-grid" id="notes-list"></div>
+            </div>
+
+            <div id="view-profile" class="view-section hidden">
+                <div class="profile-card">
+                    <h2>Profile Section</h2>
+                    <hr>
+                    <div class="profile-details">
+                        <p><strong>Name:</strong> <span id="display-name">Loading...</span></p>
+                        <p><strong>Username:</strong> @<span id="display-username">loading</span></p>
+                        <p><strong>Email:</strong> <span id="display-email">abc@mail.com</span></p>
+                        <p><strong>Role:</strong> Admin</p>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <div id="task-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn" id="close-modal">&times;</span>
+            <h2 id="modal-title">Add New Task</h2>
+            <form id="task-form">
+                <input type="hidden" id="task-id">
+                <input type="hidden" id="task-status" value="todo">
+                <div class="form-group"><label>Title</label><input type="text" id="task-title" required></div>
+                <div class="form-row">
+                    <div class="form-group"><label>Priority</label><select id="task-priority"><option value="Low">Low</option><option value="Medium">Medium</option><option value="High">High</option></select></div>
+                    <div class="form-group"><label>Due Date</label><input type="date" id="task-date" required></div>
+                </div>
+                <div class="form-group"><label>Assign To</label><select id="task-assignee"><option value="unassigned">Unassigned</option></select></div>
+                <div class="form-group"><label>Description</label><textarea id="task-desc" rows="3" required></textarea></div>
+                <button type="submit" class="save-btn">Save Task</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="member-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn" id="close-member-modal">&times;</span>
+            <h2>Add Team Member</h2>
+            <form id="member-form">
+                <div class="form-group"><label>Full Name</label><input type="text" id="member-name" required></div>
+                <div class="form-group"><label>Job Role</label><input type="text" id="member-role" placeholder="e.g., Designer" required></div>
+                <button type="submit" class="save-btn">Save Member</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="note-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn" id="close-note-modal">&times;</span>
+            <h2 id="note-modal-title">Add New Note</h2>
+            <form id="note-form">
+                <input type="hidden" id="note-id">
+                <div class="form-group"><label>Title</label><input type="text" id="note-title" placeholder="Note Title" required></div>
+                <div class="form-group"><label>Content</label><textarea id="note-content" rows="6" placeholder="Write your thoughts here..." required></textarea></div>
+                <button type="submit" class="save-btn">Save Note</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
